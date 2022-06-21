@@ -7,7 +7,7 @@ public class TaskFactory {
 		UserDAO user = new UserDAO();
 		Task task = new Task();
 		
-			task = new Task(user.get(userName).getUuid().toString(), userName, tasktitle, taskdescription) ;
+			task = new Task(user.get(userName).getUuid(), userName, tasktitle, taskdescription) ;
 		
 		
 		return task;

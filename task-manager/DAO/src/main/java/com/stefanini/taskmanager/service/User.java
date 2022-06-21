@@ -3,7 +3,7 @@ package com.stefanini.taskmanager.service;
 import java.util.UUID;
 
 public class User {
-	private String uuid;
+	private UUID uuid;
 	private String firstName;
 	private String lastName;
 	private String userName;
@@ -12,7 +12,7 @@ public class User {
 
 	}
 
-	public User(String uuid, String firstName, String lastName, String userName) {
+	public User(UUID uuid, String firstName, String lastName, String userName) {
 		super();
 		setUuid(uuid);
 		setFirstName(firstName);
@@ -21,11 +21,11 @@ public class User {
 
 	}
 
-	public String getUuid() {
+	public UUID getUuid() {
 		return uuid;
 	}
 
-	public void setUuid(String uuid) {
+	public void setUuid(UUID uuid) {
 		this.uuid = uuid;
 	}
 

@@ -108,7 +108,7 @@ public class DAOAbstract<T> implements DAOInterface<T> {
 			} else if (field.getType().getName().equals("java.lang.String")) {
 				values += "'" + value + "',";
 			}
-			values += "'" + value + "',";
+			
 
 		}
 		values = values.substring(0, values.length() - 1);
@@ -116,7 +116,7 @@ public class DAOAbstract<T> implements DAOInterface<T> {
 		String insert = "INSERT INTO public." + getTableName() + " \n" + values + ";";
 
 		Statement stmt = getConnection().createStatement();
-		System.out.println(insert);
+		
 		stmt.executeUpdate(insert);
 
 	}

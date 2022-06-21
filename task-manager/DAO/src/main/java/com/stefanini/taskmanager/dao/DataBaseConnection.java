@@ -9,7 +9,7 @@ public class DataBaseConnection {
 	   
 	    static
 	    {
-	        String url = "jdbc:mysql:// localhost:3306/users";
+	        String url = "jdbc:mysql:// localhost:3306/public";
 	        String user = "root";
 	        String pass = "d@r1@Cuc1covscAIA";
 	        try {
