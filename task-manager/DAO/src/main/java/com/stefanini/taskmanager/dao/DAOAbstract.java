@@ -35,6 +35,7 @@ public class DAOAbstract<T> implements DAOInterface<T> {
 		Field fields[] = entityClazz.getDeclaredFields();
 		String columns = " ";
 		for (Field field : fields) {
+			field.setAccessible(true);
 			columns += field.getName() + ",";
 		}
 		columns = columns.substring(0, columns.length() - 1);
@@ -49,6 +50,7 @@ public class DAOAbstract<T> implements DAOInterface<T> {
 				Constructor constr = entityClazz.getConstructor();
 				t = (T) constr.newInstance();
 				for (Field field : fields) {
+					field.setAccessible(true);
 					String fieldName = field.getName();
 					Object fieldValue = result.getObject(fieldName);
 					field.set(t, fieldValue);
@@ -76,8 +78,10 @@ public class DAOAbstract<T> implements DAOInterface<T> {
 
 	public void put(T entity) throws SQLException {
 		Field[] fields = entityClazz.getDeclaredFields();
+	
 		String columns = "(";
 		for (Field field : fields) {
+			field.setAccessible(true);
 			if (field.getType().getName().equals("int")) {
 				columns += "" + field.getName() + ",";
 			} else if (field.getType().getName().equals("java.lang.String")) {
@@ -99,11 +103,11 @@ public class DAOAbstract<T> implements DAOInterface<T> {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-//			if (field.getType().getName().equals("int")) {
-//				values += "" + value + ",";
-//			} else if (field.getType().getName().equals("java.lang.String")) {
-//				values += "'" + value + "',";
-//			}
+			if (field.getType().getName().equals("java.util.UUID")) {
+				values += "'" + value + "',";
+			} else if (field.getType().getName().equals("java.lang.String")) {
+				values += "'" + value + "',";
+			}
 			values += "'" + value + "',";
 
 		}
@@ -112,7 +116,7 @@ public class DAOAbstract<T> implements DAOInterface<T> {
 		String insert = "INSERT INTO public." + getTableName() + " \n" + values + ";";
 
 		Statement stmt = getConnection().createStatement();
-		
+		System.out.println(insert);
 		stmt.executeUpdate(insert);
 
 	}
@@ -123,7 +127,7 @@ public class DAOAbstract<T> implements DAOInterface<T> {
 
 		String columns = " ";
 		for (Field field : fields) {
-			
+			field.setAccessible(true);
 			if (field.getType().getName().equals("int")) {
 				columns += "" + field.getName() + ",";
 			} else if (field.getType().getName().equals("java.lang.String")) {
@@ -146,6 +150,7 @@ public class DAOAbstract<T> implements DAOInterface<T> {
 				Constructor constr = entityClazz.getConstructor();
 				entity = (T) constr.newInstance();
 				for (Field field : fields) {
+					field.setAccessible(true);
 					String fieldName = field.getName();
 					Object fieldValue = result.getObject(fieldName);
 

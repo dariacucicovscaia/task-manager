@@ -3,12 +3,12 @@ package com.stefanini.taskmanager.service;
 import java.util.UUID;
 
 public class Task {
-	private UUID uuid;
+	private String uuid;
 	private String userName;
 	private String taskTitle;
 	private String taskDescription;
 
-	public Task(UUID uuid, String userName, String taskTitle, String taskDescription) {
+	public Task(String uuid, String userName, String taskTitle, String taskDescription) {
 		super();
 		setUuid(uuid);
 		setUserName(userName);
@@ -22,11 +22,11 @@ public class Task {
 
 	
 
-	public UUID getUuid() {
+	public String getUuid() {
 		return uuid;
 	}
 
-	public void setUuid(UUID uuid) {
+	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
 
