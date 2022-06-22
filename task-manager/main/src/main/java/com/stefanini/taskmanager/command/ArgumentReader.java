@@ -1,9 +1,9 @@
-package com.stefanini.taskmanager;
+package com.stefanini.taskmanager.command;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ArgumentsReader {
+public class ArgumentReader {
 	public String read(String argument) {
 		String value = null;
 		if (argument.contains("'")) {

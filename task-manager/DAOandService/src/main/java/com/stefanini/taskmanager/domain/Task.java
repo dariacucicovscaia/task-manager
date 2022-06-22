@@ -1,29 +1,19 @@
-package com.stefanini.taskmanager.service;
+package com.stefanini.taskmanager.domain;
 
 public class Task {
-	private String userName;
+	private int id;
 	private String taskTitle;
 	private String taskDescription;
 
-	public Task( String userName, String taskTitle, String taskDescription) {
+	public Task(int id,  String taskTitle, String taskDescription) {
 		super();
-		
-		setUserName(userName);
+		setId(id);
 		setTaskTitle(taskTitle);
 		setTaskDescription(taskDescription);
 	}
 
 	public Task() {
-		// TODO Auto-generated constructor stub
-	}
-
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
+		
 	}
 
 	public String getTaskTitle() {
@@ -42,9 +32,17 @@ public class Task {
 		this.taskDescription = taskDescription;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	@Override
 	public String toString() {
-		return "Task [userName=" + userName + ", taskTitle=" + taskTitle + ", taskDescription=" + taskDescription + "]";
+		return "Task [id=" + id + ", taskTitle=" + taskTitle + ", taskDescription=" + taskDescription + "]";
 	}
 
 }

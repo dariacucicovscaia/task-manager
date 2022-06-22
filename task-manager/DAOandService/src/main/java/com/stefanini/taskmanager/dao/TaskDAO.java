@@ -1,6 +1,6 @@
 package com.stefanini.taskmanager.dao;
 
-import com.stefanini.taskmanager.service.Task;
+import com.stefanini.taskmanager.domain.Task;
 
 public class TaskDAO extends DAOAbstract<Task> {
 	

@@ -20,10 +20,10 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 	}
 
 	public String getTableName() {
-		return entityClazz.getName().replace("com.stefanini.taskmanager.service.", "").toLowerCase() + "s";
+		return entityClazz.getName().replace("com.stefanini.taskmanager.domain.", "").toLowerCase() + "s";
 	}
 
-	public DAOAbstract()  {
+	public DAOAbstract() {
 		// determine T
 		ParameterizedType t = (ParameterizedType) this.getClass().getGenericSuperclass();
 		entityClazz = (Class) t.getActualTypeArguments()[0];
@@ -31,7 +31,7 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 	}
 
 	@Override
-	public List<T> getAll() throws SQLException {
+	public List<T> getAll() {
 		Field fields[] = entityClazz.getDeclaredFields();
 		String columns = " ";
 		for (Field field : fields) {
@@ -41,44 +41,56 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 		columns = columns.substring(0, columns.length() - 1);
 		columns += " ";
 		String sql = "SELECT" + columns + " FROM users." + getTableName() + ";";
-		Statement stmt = getConnection().createStatement();
-		ResultSet result = stmt.executeQuery(sql);
+		ResultSet result = null;
+		try {
+			Statement stmt = getConnection().createStatement();
+			 result = stmt.executeQuery(sql);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		List<T> entity = new ArrayList<T>();
 		T t = null;
-		while (result.next()) {
-			try {
-				Constructor constr = entityClazz.getConstructor();
-				t = (T) constr.newInstance();
-				for (Field field : fields) {
-					field.setAccessible(true);
-					String fieldName = field.getName();
-					Object fieldValue = result.getObject(fieldName);
-					field.set(t, fieldValue);
+		try {
+			while (result.next()) {
+				try {
+					Constructor constr = entityClazz.getConstructor();
+					t = (T) constr.newInstance();
+					for (Field field : fields) {
+						field.setAccessible(true);
+						String fieldName = field.getName();
+						Object fieldValue = result.getObject(fieldName);
+						field.set(t, fieldValue);
+					}
+				} catch (NoSuchMethodException | SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			} catch (NoSuchMethodException | SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				entity.add(t);
 			}
-			entity.add(t);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return entity;
 	}
 
-	public void put(T entity) throws SQLException {
+	@Override
+	public void put(T entity) {
 		Field[] fields = entityClazz.getDeclaredFields();
-	
+
 		String columns = "(";
 		for (Field field : fields) {
 			field.setAccessible(true);
@@ -94,30 +106,37 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 
 		String values = "VALUES (";
 		for (Field field : fields) {
-			Object value = null;
-			field.setAccessible(true);
-			try {
-				value = field.get(entity);
 
+			try {
+				Object value = field.get(entity);
+				if (field.getType().getName().equals("int")) {
+					values += value + ",";
+				} else if (field.getType().getName().equals("java.lang.String")) {
+					values += "'" + value + "',";
+				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if (field.getType().getName().equals("java.util.UUID")) {
-				values += "'" + value + "',";
-			} else if (field.getType().getName().equals("java.lang.String")) {
-				values += "'" + value + "',";
-			}
-			
 
 		}
 		values = values.substring(0, values.length() - 1);
 		values += ") ";
 		String insert = "INSERT INTO users." + getTableName() + " \n" + values + ";";
 
-		Statement stmt = getConnection().createStatement();
-		
-		stmt.executeUpdate(insert);
+		Statement stmt = null;
+		try {
+			stmt = getConnection().createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			stmt.executeUpdate(insert);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -180,11 +199,19 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 		return entity;
 	}
 
-	public void remove(String username) throws SQLException {
-		String sql = "DELETE FROM users." + getTableName() + " \r\n 	WHERE userName= '" + username + "' ;";
+	@Override
+	public void remove(int id)  {
+		String sql = "DELETE FROM users." + getTableName() + " \r\n 	WHERE id= '" +id + "' ;";
 
-		Statement stmt = getConnection().createStatement();
-		stmt.executeUpdate(sql);
+		Statement stmt = null;
+		try {
+			stmt = getConnection().createStatement();
+		
+			stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
