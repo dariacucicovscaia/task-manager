@@ -1,7 +1,6 @@
 package com.stefanini.taskmanager.command.acctions;
 
 import com.stefanini.taskmanager.command.ArgumentReader;
-import com.stefanini.taskmanager.command.Command;
 import com.stefanini.taskmanager.command.OpsWithArguments;
 import com.stefanini.taskmanager.service.UserService;
 

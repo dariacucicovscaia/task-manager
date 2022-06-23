@@ -1,15 +1,26 @@
 package com.stefanini.taskmanager.command;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+
+import com.stefanini.taskmanager.CLIApp;
 import com.stefanini.taskmanager.command.acctions.AddTask;
 import com.stefanini.taskmanager.command.acctions.CreateUser;
+import com.stefanini.taskmanager.command.acctions.RemoveTask;
 import com.stefanini.taskmanager.command.acctions.RemoveUser;
 import com.stefanini.taskmanager.command.acctions.ShowAllUsers;
 import com.stefanini.taskmanager.command.acctions.ShowUserTasks;
 
 public class ChoseCommand implements ChoseCommandInterface {
 
+	Logger logger = Logger.getLogger(ChoseCommand.class);
+	
+	
 	@Override
 	public void choseCommand(String[] args) {
+		
+		BasicConfigurator.configure();
+		
 		switch (args[0]) {
 		case "createUser":
 			CreateUser createuser = new CreateUser(args);
@@ -31,8 +42,12 @@ public class ChoseCommand implements ChoseCommandInterface {
 			RemoveUser removeUser = new RemoveUser(args);
 			removeUser.execute();
 			break;
+		case "removeTask":
+			RemoveTask removeTask = new RemoveTask(args);
+			removeTask.execute();
+			break;
 		default:
-			System.out.println("error");;
+			logger.error("no args[0]");;
 		}
 	}
 

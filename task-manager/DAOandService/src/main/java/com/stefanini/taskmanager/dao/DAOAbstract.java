@@ -10,8 +10,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+
 
 public abstract class DAOAbstract<T> implements DAOInterface<T> {
+
+	Logger logger = Logger.getLogger(DAOAbstract.class);
 
 	private Class<T> entityClazz;
 
@@ -27,11 +32,12 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 		// determine T
 		ParameterizedType t = (ParameterizedType) this.getClass().getGenericSuperclass();
 		entityClazz = (Class) t.getActualTypeArguments()[0];
-
+		BasicConfigurator.configure();
 	}
 
 	@Override
 	public List<T> getAll() {
+
 		Field fields[] = entityClazz.getDeclaredFields();
 		String columns = " ";
 		for (Field field : fields) {
@@ -44,10 +50,9 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 		ResultSet result = null;
 		try {
 			Statement stmt = getConnection().createStatement();
-			 result = stmt.executeQuery(sql);
+			result = stmt.executeQuery(sql);
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			logger.error(e1.getMessage());
 		}
 		List<T> entity = new ArrayList<T>();
 		T t = null;
@@ -62,27 +67,14 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 						Object fieldValue = result.getObject(fieldName);
 						field.set(t, fieldValue);
 					}
-				} catch (NoSuchMethodException | SecurityException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				} catch (NoSuchMethodException | SecurityException | InstantiationException |IllegalAccessException | IllegalArgumentException |InvocationTargetException e) {
+					logger.error(e.getMessage());
+				
 				}
 				entity.add(t);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 		return entity;
 	}
@@ -115,8 +107,7 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 					values += "'" + value + "',";
 				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error(e.getMessage());
 			}
 
 		}
@@ -127,15 +118,9 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 		Statement stmt = null;
 		try {
 			stmt = getConnection().createStatement();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
 			stmt.executeUpdate(insert);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 
 	}
@@ -172,26 +157,11 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 					field.setAccessible(true);
 					String fieldName = field.getName();
 					Object fieldValue = result.getObject(fieldName);
-
-					// System.out.println(fieldValue + " "+ fieldName);
 					field.set(entity, fieldValue);
 				}
 
-			} catch (NoSuchMethodException | SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				logger.error(e.getMessage());
 			}
 
 		}
@@ -200,17 +170,15 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 	}
 
 	@Override
-	public void remove(int id)  {
-		String sql = "DELETE FROM users." + getTableName() + " \r\n 	WHERE id= '" +id + "' ;";
+	public void remove(int id) {
+		String sql = "DELETE FROM users." + getTableName() + " \r\n 	WHERE id= '" + id + "' ;";
 
 		Statement stmt = null;
 		try {
 			stmt = getConnection().createStatement();
-		
 			stmt.executeUpdate(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 
 	}
