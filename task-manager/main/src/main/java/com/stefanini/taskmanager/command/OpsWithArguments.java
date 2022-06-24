@@ -18,7 +18,7 @@ public class OpsWithArguments {
 		return value;
 	}
 
-	public static String valueBetweenApostrohe(String string) {
+	public String valueBetweenApostrohe(String string) {
 		String ValueWeNeed = null;
 		String[] paras = string.split("\n");
 		Pattern pattern = Pattern.compile("'(.*?)'");
@@ -31,4 +31,5 @@ public class OpsWithArguments {
 
 		return ValueWeNeed;
 	}
+	
 }

@@ -23,12 +23,7 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
-		<!-- http://jopt-simple.github.io/jopt-simple/dependency-info.html -->
-		<!-- <dependency>
-			<groupId>net.sf.jopt-simple</groupId>
-			<artifactId>jopt-simple</artifactId>
-			<version>6.0-alpha-3</version>
-		</dependency>-->
+		
 
 	</dependencies>
 
@@ -43,6 +38,7 @@
 				</configuration>
 			</plugin>
 
+	
 		</plugins>
 	</build>
 </project>

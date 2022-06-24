@@ -1,6 +1,7 @@
 package com.stefanini.taskmanager.dao;
 
 import java.lang.reflect.Constructor;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
+
 
 public abstract class DAOAbstract<T> implements DAOInterface<T> {
 
@@ -66,10 +68,18 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 						Object fieldValue = result.getObject(fieldName);
 						field.set(t, fieldValue);
 					}
-				} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
-						| IllegalArgumentException | InvocationTargetException e) {
+				} catch (IllegalArgumentException e) {
 					logger.error(e.getMessage());
-
+				} catch (NoSuchMethodException e) {
+					logger.error(e.getMessage());
+				} catch (SecurityException e) {
+					logger.error(e.getMessage());
+				} catch (InstantiationException e) {
+					logger.error(e.getMessage());
+				} catch (IllegalAccessException e) {
+					logger.error(e.getMessage());
+				} catch (InvocationTargetException e) {
+					logger.error(e.getMessage());
 				}
 				entity.add(t);
 			}
@@ -91,7 +101,7 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 		columns = columns.substring(0, columns.length() - 1);
 		columns += " ";
 		String sql = "SELECT" + columns + " FROM users." + getTableName() + " WHERE id=" + id + " ;";
-		
+
 		ResultSet result = null;
 		try {
 			Statement stmt = getConnection().createStatement();
@@ -112,8 +122,22 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 						Object fieldValue = result.getObject(fieldName);
 						field.set(t, fieldValue);
 					}
-				} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
-						| IllegalArgumentException | InvocationTargetException e) {
+				} catch (InvocationTargetException e) {
+					logger.error(e.getMessage());
+
+				} catch (NoSuchMethodException e) {
+					logger.error(e.getMessage());
+
+				} catch (SecurityException e) {
+					logger.error(e.getMessage());
+
+				} catch (InstantiationException e) {
+					logger.error(e.getMessage());
+
+				} catch (IllegalAccessException e) {
+					logger.error(e.getMessage());
+
+				} catch (IllegalArgumentException e) {
 					logger.error(e.getMessage());
 
 				}
@@ -127,6 +151,9 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 
 	@Override
 	public void put(T entity) {
+
+		
+
 		Field[] fields = entityClazz.getDeclaredFields();
 
 		String columns = "(";
@@ -152,7 +179,9 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 				} else if (field.getType().getName().equals("java.lang.String")) {
 					values += "'" + value + "',";
 				}
-			} catch (IllegalArgumentException | IllegalAccessException e) {
+			} catch (IllegalArgumentException  e) {
+				logger.error(e.getMessage());
+			}catch ( IllegalAccessException e) {
 				logger.error(e.getMessage());
 			}
 
@@ -210,7 +239,7 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 						field.set(entity, fieldValue);
 					}
 
-				} catch (NoSuchMethodException | SecurityException e) {
+				} catch (NoSuchMethodException  e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (InstantiationException e) {
@@ -226,6 +255,9 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}catch (SecurityException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -270,7 +302,7 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 						field.set(entity, fieldValue);
 					}
 
-				} catch (NoSuchMethodException | SecurityException e) {
+				} catch (NoSuchMethodException  e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (InstantiationException e) {
@@ -283,6 +315,9 @@ public abstract class DAOAbstract<T> implements DAOInterface<T> {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (InvocationTargetException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}catch (SecurityException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

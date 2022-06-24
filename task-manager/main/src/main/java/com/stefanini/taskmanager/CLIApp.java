@@ -1,18 +1,17 @@
 package com.stefanini.taskmanager;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 import com.stefanini.taskmanager.command.ChoseCommand;
 
 public class CLIApp {
-	public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException {
+	public static void main(String[] args) {
 
 		Logger logger = Logger.getLogger(CLIApp.class);
 		BasicConfigurator.configure();
+		
+		logger.info("App started");
 		
 		if (args.length == 0) {
 			logger.error("calling without arguments");
@@ -20,5 +19,7 @@ public class CLIApp {
 
 		ChoseCommand command = new ChoseCommand();
 		command.choseCommand(args);
+
+		
 	}
 }
