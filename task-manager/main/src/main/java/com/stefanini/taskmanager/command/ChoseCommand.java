@@ -9,7 +9,8 @@ import com.stefanini.taskmanager.command.acctions.CreateUser;
 import com.stefanini.taskmanager.command.acctions.RemoveTask;
 import com.stefanini.taskmanager.command.acctions.RemoveUser;
 import com.stefanini.taskmanager.command.acctions.ShowAllUsers;
-import com.stefanini.taskmanager.command.acctions.ShowUserTasks;
+import com.stefanini.taskmanager.command.acctions.ShowAllTasks;
+import com.stefanini.taskmanager.command.acctions.ShowUsersTask;
 
 public class ChoseCommand implements ChoseCommandInterface {
 
@@ -34,9 +35,9 @@ public class ChoseCommand implements ChoseCommandInterface {
 			ShowAllUsers showallusers = new ShowAllUsers(args);
 			showallusers.execute();
 			break;
-		case "showUserTasks":
-			ShowUserTasks showusertasks = new ShowUserTasks(args);
-			showusertasks.execute();
+		case "showAllTasks":
+			ShowAllTasks ShowAllTasks = new ShowAllTasks(args);
+			ShowAllTasks.execute();
 			break;
 		case "removeUser":
 			RemoveUser removeUser = new RemoveUser(args);
@@ -45,6 +46,10 @@ public class ChoseCommand implements ChoseCommandInterface {
 		case "removeTask":
 			RemoveTask removeTask = new RemoveTask(args);
 			removeTask.execute();
+			break;
+		case "showUsersTask":
+			ShowUsersTask showUsersTask = new ShowUsersTask(args);
+			showUsersTask.execute();
 			break;
 		default:
 			logger.error("no args[0]");;

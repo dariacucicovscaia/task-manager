@@ -2,15 +2,6 @@ package com.stefanini.taskmanager.domain;
 
 public class User {
 	private int id;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	private String firstName;
 	private String lastName;
 	private String userName;
@@ -21,17 +12,25 @@ public class User {
 
 	public User(int id, String firstName, String lastName, String userName) {
 		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.userName = userName;
+		setId(id);
+		setFirstName(firstName);
+		setLastName(lastName);
+		setUserName(userName);
 	}
 
 	public User(String firstName, String lastName, String userName) {
 		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.userName = userName;
+		setFirstName(firstName);
+		setLastName(lastName);
+		setUserName(userName);
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getFirstName() {

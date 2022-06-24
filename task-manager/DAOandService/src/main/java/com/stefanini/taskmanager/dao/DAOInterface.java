@@ -1,15 +1,18 @@
 package com.stefanini.taskmanager.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface DAOInterface<T> {
-	List<T> getAll() ;
+	List<T> getAll();
 
-	void put(T entity) ;
+	List<T> getAllWithId(int id);
 
-	T get(String userName) throws SQLException, ClassNotFoundException, NoSuchMethodException;
+	void put(T entity);
 
-	void remove(int id) ;
+	T get(int id);
+
+	T get(String username);
+
+	void remove(int id);
 
 }

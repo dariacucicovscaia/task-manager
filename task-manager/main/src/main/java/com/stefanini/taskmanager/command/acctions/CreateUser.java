@@ -1,6 +1,5 @@
 package com.stefanini.taskmanager.command.acctions;
 
-import com.stefanini.taskmanager.command.ArgumentReader;
 import com.stefanini.taskmanager.command.OpsWithArguments;
 import com.stefanini.taskmanager.service.UserService;
 
@@ -13,11 +12,11 @@ public class CreateUser extends OpsWithArguments implements Command {
 	}
 
 	public void execute() {
-		ArgumentReader argread = new ArgumentReader();
+	
 
-		String firstName = argread.read(args[1]);
-		String lastName = argread.read(args[2]);
-		String userName = argread.read(args[3]);
+		String firstName = read(args[1]);
+		String lastName = read(args[2]);
+		String userName = read(args[3]);
 
 		userservice.createUser(firstName, lastName, userName);
 		

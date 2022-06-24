@@ -10,6 +10,10 @@ public class UserService {
 	UserDAO userDao = new UserDAO();
 
 	
+	public int /*id*/ searchIdByUsername(String username) {
+		return userDao.get(username).getId();
+	}
+	
 	public void createUser(String firstName, String lastname, String userName ) {
 		userDao.put(new User( firstName,lastname, userName));
 	}
