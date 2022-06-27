@@ -14,9 +14,11 @@ public class AddTask extends OpsWithArguments implements Command {
 		super(args);
 	}
 
+	/**
+	 * Adds a task via execute command
+	 */
 	@Override
 	public void execute() {
-
 		Logger logger = Logger.getLogger(CLIApp.class);
 		BasicConfigurator.configure();
 

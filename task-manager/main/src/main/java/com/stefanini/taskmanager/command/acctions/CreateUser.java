@@ -15,6 +15,9 @@ public class CreateUser extends OpsWithArguments implements Command {
 
 	}
 
+	/**
+	 * creates a user via execute command
+	 */
 	@Override
 	public void execute() {
 		Logger logger = Logger.getLogger(CLIApp.class);
