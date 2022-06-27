@@ -12,16 +12,16 @@ public class AddTask extends OpsWithArguments implements Command {
 
 	public AddTask(String[] args) {
 		super(args);
-
 	}
 
+	@Override
 	public void execute() {
 
 		Logger logger = Logger.getLogger(CLIApp.class);
 		BasicConfigurator.configure();
-		
+
 		String username = read(args[1]);
-		String taskTitle =read(args[2]);
+		String taskTitle = read(args[2]);
 		String taskDescription = read(args[3]);
 
 		int id = taskservice.searchIdByUsername(username);

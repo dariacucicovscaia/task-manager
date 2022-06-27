@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 
 import com.stefanini.taskmanager.CLIApp;
 import com.stefanini.taskmanager.command.acctions.AddTask;
+import com.stefanini.taskmanager.command.acctions.Command;
 import com.stefanini.taskmanager.command.acctions.CreateUser;
 import com.stefanini.taskmanager.command.acctions.RemoveTask;
 import com.stefanini.taskmanager.command.acctions.RemoveUser;
@@ -15,44 +16,30 @@ import com.stefanini.taskmanager.command.acctions.ShowUsersTask;
 public class ChoseCommand implements ChoseCommandInterface {
 
 	Logger logger = Logger.getLogger(ChoseCommand.class);
-	
-	
+
 	@Override
-	public void choseCommand(String[] args) {
-		
+	public Command choseCommand(String[] args) {
+
 		BasicConfigurator.configure();
-		
+
 		switch (args[0]) {
 		case "createUser":
-			CreateUser createuser = new CreateUser(args);
-			createuser.execute();
-			break;
+			return new CreateUser(args);
 		case "addTask":
-			AddTask addtask = new AddTask(args);
-			addtask.execute();
-			break;
+			return new AddTask(args);
 		case "showAllUsers":
-			ShowAllUsers showallusers = new ShowAllUsers(args);
-			showallusers.execute();
-			break;
+			return new ShowAllUsers(args);
 		case "showAllTasks":
-			ShowAllTasks ShowAllTasks = new ShowAllTasks(args);
-			ShowAllTasks.execute();
-			break;
+			return new ShowAllTasks(args);
 		case "removeUser":
-			RemoveUser removeUser = new RemoveUser(args);
-			removeUser.execute();
-			break;
+			return new RemoveUser(args);
 		case "removeTask":
-			RemoveTask removeTask = new RemoveTask(args);
-			removeTask.execute();
-			break;
+			return new RemoveTask(args);
 		case "showUsersTask":
-			ShowUsersTask showUsersTask = new ShowUsersTask(args);
-			showUsersTask.execute();
-			break;
+			return new ShowUsersTask(args);
 		default:
-			logger.error("no args[0]");;
+			return null;
+			
 		}
 	}
 

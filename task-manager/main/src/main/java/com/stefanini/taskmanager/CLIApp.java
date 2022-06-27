@@ -18,7 +18,7 @@ public class CLIApp {
 		}
 
 		ChoseCommand command = new ChoseCommand();
-		command.choseCommand(args);
+		command.choseCommand(args).execute();;
 
 		
 	}

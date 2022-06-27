@@ -12,19 +12,20 @@ public class CreateUser extends OpsWithArguments implements Command {
 
 	public CreateUser(String[] args) {
 		super(args);
-		
+
 	}
 
+	@Override
 	public void execute() {
 		Logger logger = Logger.getLogger(CLIApp.class);
 		BasicConfigurator.configure();
-		
+
 		String firstName = read(args[1]);
 		String lastName = read(args[2]);
 		String userName = read(args[3]);
 
 		userservice.createUser(firstName, lastName, userName);
-		
+
 		logger.trace("Operation successful\nUser created!");
 
 	}

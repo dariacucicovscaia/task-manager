@@ -1,6 +1,7 @@
 package com.stefanini.taskmanager.command;
 
-public interface ChoseCommandInterface  {
-	public void choseCommand(String[] args);
+import com.stefanini.taskmanager.command.acctions.Command;
 
+public interface ChoseCommandInterface  {
+	public Command choseCommand(String[] args);
 }
