@@ -1,10 +1,39 @@
 package com.stefanini.taskmanager.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "users")
 public class User {
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+	@GenericGenerator(name = "native", strategy = "native")
+	@Id
+	@Column(name = "id")
 	private int id;
+	@Column(name = "firstName")
 	private String firstName;
+	@Column(name = "lastName")
 	private String lastName;
+	@Column(name = "userName")
 	private String userName;
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "users_tasks", inverseJoinColumns = @JoinColumn(name = "task_id"), joinColumns = @JoinColumn(name = "user_id"))
+	private Set<Task> tasks = new HashSet<>();
 
 	public User() {
 
@@ -57,10 +86,14 @@ public class User {
 		this.lastName = lastName;
 	}
 
+	public void addTask(Task task) {
+		this.tasks.add(task);
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName
-				+ "]";
+				+ ", tasks=" + tasks + "]";
 	}
 
 }

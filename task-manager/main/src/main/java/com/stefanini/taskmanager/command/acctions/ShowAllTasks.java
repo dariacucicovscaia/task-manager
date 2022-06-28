@@ -2,9 +2,10 @@ package com.stefanini.taskmanager.command.acctions;
 
 import com.stefanini.taskmanager.command.OpsWithArguments;
 import com.stefanini.taskmanager.service.TaskService;
+import com.stefanini.taskmanager.service.TaskServiceImpl;
 
 public class ShowAllTasks extends OpsWithArguments implements Command {
-	private TaskService taskservice = new TaskService();
+	private TaskService taskservice = new TaskServiceImpl();
 
 	public ShowAllTasks(String[] args) {
 		super(args);
@@ -12,7 +13,7 @@ public class ShowAllTasks extends OpsWithArguments implements Command {
 
 	@Override
 	public void execute() {
-		taskservice.showUserTasks().stream().forEach(System.out::println);
+		taskservice.showAllTasks().stream().forEach(System.out::println);
 
 	}
 

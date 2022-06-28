@@ -2,37 +2,53 @@ package com.stefanini.taskmanager.service;
 
 import java.util.List;
 
-import com.stefanini.taskmanager.dao.TaskDAO;
-import com.stefanini.taskmanager.dao.UserDAO;
 import com.stefanini.taskmanager.domain.Task;
+import com.stefanini.taskmanager.domain.User;
 
-public class TaskService implements TaskServiceInterface {
+/**
+ * abstract method definition for task service
+ * 
+ * @author DCUCICOV
+ *
+ */
+public interface TaskService {
 
-	TaskDAO taskdao = new TaskDAO();
-	UserDAO userdao = new UserDAO();
+	/**
+	 * Adds the task to a specific user
+	 * 
+	 * @param id              user id
+	 * @param taskTitle       the title of the task
+	 * @param taskDescription the description of the task
+	 */
+	public void addTask(String taskTitle, String taskDescription);
 
-	@Override
-	public int /* id */ searchIdByUsername(String username) {
-		return userdao.get(username).getId();
-	}
+	/**
+	 * Displays all tasks
+	 * 
+	 * @return list of tasks
+	 */
+	public List<Task> showAllTasks();
 
-	@Override
-	public void addTask(int id, String taskTitle, String taskDescription) {
-		taskdao.put(new Task(id, taskTitle, taskDescription));
-	}
+	/**
+	 * Removes the task of a specific user
+	 * 
+	 * @param id searches the task to remove by the user id
+	 */
+	public void removeTask(String userName);
 
-	@Override
-	public List<Task> showUserTasks() {
-		return taskdao.getAll();
-	}
+	/**
+	 * Shows all the tasks that a user has
+	 * 
+	 * @param userName searches the tasks a user has by the user name
+	 * @return tasks of a user
+	 */
+	public User getTasksOfAUser(String userName);
 
-	@Override
-	public void removeTask(int id) {
-		taskdao.remove(id);
-	}
+	/**
+	 * Removes a user by the id
+	 * 
+	 * @param id - the id of the user to remove
+	 */
 
-	@Override
-	public String showUserTask(int id) {
-		return userdao.get(id) + " " + taskdao.getAllWithId(id);
-	}
+	public void removeTask(int id);
 }

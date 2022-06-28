@@ -2,10 +2,11 @@ package com.stefanini.taskmanager.command.acctions;
 
 import com.stefanini.taskmanager.command.OpsWithArguments;
 import com.stefanini.taskmanager.service.UserService;
+import com.stefanini.taskmanager.service.UserServiceImpl;
 
-public class ShowAllUsers  extends OpsWithArguments implements Command {
+public class ShowAllUsers extends OpsWithArguments implements Command {
 
-	private UserService userservice = new UserService();
+	private UserService userservice = new UserServiceImpl();
 
 	public ShowAllUsers(String[] args) {
 		super(args);
@@ -13,8 +14,9 @@ public class ShowAllUsers  extends OpsWithArguments implements Command {
 
 	@Override
 	public void execute() {
-		userservice.showAllUsers().stream().forEach(System.out::println);;
-		
+		userservice.showAllUsers().stream().forEach(System.out::println);
+		;
+
 	}
 
 }

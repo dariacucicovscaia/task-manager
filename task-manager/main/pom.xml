@@ -15,8 +15,7 @@
 		<dep.version>1.0-SNAPSHOT</dep.version>
 	</properties>
 
-
-	<dependencies>
+<dependencies>
 		<dependency>
 			<groupId>task-manager</groupId>
 			<artifactId>DAOandService</artifactId>
@@ -65,4 +64,6 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
+	
 </project>

@@ -1,19 +1,55 @@
 package com.stefanini.taskmanager.domain;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "tasks")
 public class Task {
-	private int id;
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+	@GenericGenerator(name = "native", strategy = "native")
+	@Id
+	private int taskId;
 	private String taskTitle;
 	private String taskDescription;
 
-	public Task(int id,  String taskTitle, String taskDescription) {
+	@Transient
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "users_tasks", inverseJoinColumns = @JoinColumn(name = "user_id"), joinColumns = @JoinColumn(name = "task_id"))
+	private User users;
+
+	public Task() {
+
+	}
+
+	public Task(int taskId, String taskTitle, String taskDescription) {
 		super();
-		setId(id);
+		this.taskId = taskId;
+		this.taskTitle = taskTitle;
+		this.taskDescription = taskDescription;
+	}
+
+	public Task(String taskTitle, String taskDescription) {
 		setTaskTitle(taskTitle);
 		setTaskDescription(taskDescription);
 	}
 
-	public Task() {
-		
+	public User getUsers() {
+		return users;
+	}
+
+	public void setUsers(User users) {
+		this.users = users;
 	}
 
 	public String getTaskTitle() {
@@ -32,17 +68,17 @@ public class Task {
 		this.taskDescription = taskDescription;
 	}
 
-	public int getId() {
-		return id;
+	public int getTaskId() {
+		return taskId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setTaskId(int taskId) {
+		this.taskId = taskId;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Task [id=" + id + ", taskTitle=" + taskTitle + ", taskDescription=" + taskDescription + "]";
+		return "Task [taskId=" + taskId + ", taskTitle=" + taskTitle + ", taskDescription=" + taskDescription + "]";
 	}
 
 }

@@ -4,12 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
-public class DataBaseConnection extends LoadDBProperties {
+public class DataBaseConnection extends ALoadProperties {
 	private static Connection con = null;
-
 
 	static {
 		String propertiesFilename = "config.properties";

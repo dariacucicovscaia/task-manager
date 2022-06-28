@@ -4,25 +4,23 @@ import com.stefanini.taskmanager.command.OpsWithArguments;
 import com.stefanini.taskmanager.service.UserService;
 import com.stefanini.taskmanager.service.UserServiceImpl;
 
-public class CreateUser extends OpsWithArguments implements Command {
+public class CreateUserAndAddTask extends OpsWithArguments implements Command {
 	private UserService userservice = new UserServiceImpl();
 
-	public CreateUser(String[] args) {
+	public CreateUserAndAddTask(String[] args) {
 		super(args);
 
 	}
 
-	/**
-	 * creates a user via execute command
-	 */
 	@Override
 	public void execute() {
 		String firstName = read(args[1]);
 		String lastName = read(args[2]);
 		String userName = read(args[3]);
+		String taskTitle = read(args[4]);
+		String taskDescription = read(args[5]);
 
-		userservice.createUser(firstName, lastName, userName);
+		userservice.createUserAndAddTask(firstName, lastName, userName, taskTitle, taskDescription);
 
 	}
-
 }
