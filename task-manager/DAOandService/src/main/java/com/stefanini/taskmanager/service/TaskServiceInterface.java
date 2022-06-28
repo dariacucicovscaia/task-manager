@@ -5,7 +5,7 @@ import java.util.List;
 import com.stefanini.taskmanager.domain.Task;
 
 /**
- * 
+ * abstract method definition for task service
  * @author DCUCICOV
  *
  */

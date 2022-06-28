@@ -4,7 +4,11 @@ import java.util.List;
 
 import com.stefanini.taskmanager.dao.UserDAO;
 import com.stefanini.taskmanager.domain.User;
-
+/**
+ * 
+ * @author DCUCICOV
+ *
+ */
 public class UserService implements UserServiceInterface {
 	UserDAO userDao = new UserDAO();
 

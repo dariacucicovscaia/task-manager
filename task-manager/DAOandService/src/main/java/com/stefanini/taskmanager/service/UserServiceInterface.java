@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.stefanini.taskmanager.domain.User;
 /**
- * 
+ * abstract method definition for user service 
  * @author DCUCICOV
  *
  */
