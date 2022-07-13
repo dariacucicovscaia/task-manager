@@ -37,7 +37,7 @@ public interface DAO<T> {
 	 * @param id id of the entity
 	 * @return the entity with the specified id
 	 */
-	T get(int id);
+	T getEntityById(int id);
 
 	/**
 	 * Removes a row with the specified id

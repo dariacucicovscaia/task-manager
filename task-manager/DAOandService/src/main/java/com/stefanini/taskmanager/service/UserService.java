@@ -17,7 +17,7 @@ public interface UserService {
 	 * @param id the id of the user
 	 * @return user entity
 	 */
-	public User getUser(int id);
+	User getUser(int id);
 
 	/**
 	 * Creates a user
@@ -26,14 +26,14 @@ public interface UserService {
 	 * @param lastname  last name of the new user
 	 * @param userName  user name of the new user
 	 */
-	public void createUser(String firstName, String lastname, String userName);
+	void createUser(String firstName, String lastname, String userName);
 
 	/**
 	 * Removes a user by a userName
 	 * 
 	 * @param userName searches the user to remove
 	 */
-	public void removeUser(String userName);
+	void removeUser(String userName);
 
 	/**
 	 * Removes a user by a id
@@ -41,14 +41,14 @@ public interface UserService {
 	 * @param id searches the user to remove
 	 */
 
-	public void removeUser(int id);
+	void removeUser(int id);
 
 	/**
 	 * Shows all the existing users
 	 * 
 	 * @return a list of all the users
 	 */
-	public List<User> showAllUsers();
+	List<User> showAllUsers();
 
 	/**
 	 * Assigning a task to the user
@@ -56,7 +56,7 @@ public interface UserService {
 	 * @param userName
 	 * @param taskTitle
 	 */
-	public void assignTask(String userName, String taskTitle);
+	void assignTask(String userName, String taskTitle);
 
 	/**
 	 * Creates a user and a task
@@ -69,7 +69,7 @@ public interface UserService {
 	 * 
 	 * @return true if the user was successfully created
 	 */
-	public boolean createUserAndAddTask(String firstName, String lastName, String userName, String taskTitle,
+	boolean createUserAndAddTask(String firstName, String lastName, String userName, String taskTitle,
 			String taskDescription);
 
 }

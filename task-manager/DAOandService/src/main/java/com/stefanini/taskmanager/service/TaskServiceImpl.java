@@ -13,8 +13,13 @@ import com.stefanini.taskmanager.domain.User;
  */
 public class TaskServiceImpl implements TaskService {
 
-	private UserDAO userDao = new UserDAO();
-	private TaskDAO taskDao = new TaskDAO();
+	private UserDAO userDao;
+	private TaskDAO taskDao;
+
+	public TaskServiceImpl() {
+		userDao = new UserDAO();
+		taskDao = new TaskDAO();
+	}
 
 	@Override
 	public void addTask(String taskTitle, String taskDescription) {

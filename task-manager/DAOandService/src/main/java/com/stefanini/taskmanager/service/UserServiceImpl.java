@@ -16,8 +16,13 @@ import com.stefanini.taskmanager.sendMail.SendMail;
  */
 public class UserServiceImpl implements UserService {
 
-	private UserDAO userDao = new UserDAO();
-	private TaskDAO taskDao = new TaskDAO();
+	private UserDAO userDao;
+	private TaskDAO taskDao;
+
+	public UserServiceImpl() {
+		userDao = new UserDAO();
+		taskDao = new TaskDAO();
+	}
 
 	@Override
 	public User getUser(int id) {

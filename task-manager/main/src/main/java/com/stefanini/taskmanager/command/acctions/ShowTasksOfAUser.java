@@ -5,10 +5,11 @@ import com.stefanini.taskmanager.service.TaskService;
 import com.stefanini.taskmanager.service.TaskServiceImpl;
 
 public class ShowTasksOfAUser extends OpsWithArguments implements Command {
-	private TaskService taskService = new TaskServiceImpl();
+	private TaskService taskService;
 
 	public ShowTasksOfAUser(String[] args) {
 		super(args);
+		taskService = new TaskServiceImpl();
 	}
 
 	@Override

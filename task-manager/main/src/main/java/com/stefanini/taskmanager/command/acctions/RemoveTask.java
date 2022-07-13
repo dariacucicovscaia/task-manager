@@ -5,11 +5,11 @@ import com.stefanini.taskmanager.service.TaskService;
 import com.stefanini.taskmanager.service.TaskServiceImpl;
 
 public class RemoveTask extends OpsWithArguments implements Command {
-	private TaskService taskservice = new TaskServiceImpl();
+	private TaskService taskservice;
 
 	public RemoveTask(String args[]) {
 		super(args);
-
+		taskservice = new TaskServiceImpl();
 	}
 
 	@Override

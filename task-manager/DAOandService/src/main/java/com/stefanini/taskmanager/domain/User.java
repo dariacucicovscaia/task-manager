@@ -1,7 +1,7 @@
 package com.stefanini.taskmanager.domain;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,14 +33,13 @@ public class User {
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "users_tasks", inverseJoinColumns = @JoinColumn(name = "task_id"), joinColumns = @JoinColumn(name = "user_id"))
-	private Set<Task> tasks = new HashSet<>();
+	private List<Task> tasks = new ArrayList<>();
 
 	public User() {
 
 	}
 
 	public User(int id, String firstName, String lastName, String userName) {
-		super();
 		setId(id);
 		setFirstName(firstName);
 		setLastName(lastName);
@@ -48,7 +47,6 @@ public class User {
 	}
 
 	public User(String firstName, String lastName, String userName) {
-		super();
 		setFirstName(firstName);
 		setLastName(lastName);
 		setUserName(userName);

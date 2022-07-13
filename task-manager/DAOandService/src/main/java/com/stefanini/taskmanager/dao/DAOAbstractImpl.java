@@ -143,7 +143,7 @@ public abstract class DAOAbstractImpl<T> implements DAO<T> {
 	}
 
 	@Override
-	public T get(int id) {
+	public T getEntityById(int id) {
 		Field fields[] = entityClazz.getDeclaredFields();
 
 		String columns = " ";

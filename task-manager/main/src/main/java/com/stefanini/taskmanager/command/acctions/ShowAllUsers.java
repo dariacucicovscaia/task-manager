@@ -6,10 +6,11 @@ import com.stefanini.taskmanager.service.UserServiceImpl;
 
 public class ShowAllUsers extends OpsWithArguments implements Command {
 
-	private UserService userservice = new UserServiceImpl();
+	private UserService userservice;
 
 	public ShowAllUsers(String[] args) {
 		super(args);
+		userservice = new UserServiceImpl();
 	}
 
 	@Override

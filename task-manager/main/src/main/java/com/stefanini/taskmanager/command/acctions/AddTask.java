@@ -5,10 +5,11 @@ import com.stefanini.taskmanager.service.TaskService;
 import com.stefanini.taskmanager.service.TaskServiceImpl;
 
 public class AddTask extends OpsWithArguments implements Command {
-	private TaskService taskservice = new TaskServiceImpl();
+	private TaskService taskservice;
 
 	public AddTask(String[] args) {
 		super(args);
+		taskservice = new TaskServiceImpl();
 	}
 
 	/**

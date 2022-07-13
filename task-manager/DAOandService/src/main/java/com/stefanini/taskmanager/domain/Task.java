@@ -1,5 +1,7 @@
 package com.stefanini.taskmanager.domain;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,14 +28,13 @@ public class Task {
 	@Transient
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "users_tasks", inverseJoinColumns = @JoinColumn(name = "user_id"), joinColumns = @JoinColumn(name = "task_id"))
-	private User users;
+	private List<User> users;
 
 	public Task() {
 
 	}
 
 	public Task(int taskId, String taskTitle, String taskDescription) {
-		super();
 		this.taskId = taskId;
 		this.taskTitle = taskTitle;
 		this.taskDescription = taskDescription;
@@ -44,11 +45,11 @@ public class Task {
 		setTaskDescription(taskDescription);
 	}
 
-	public User getUsers() {
+	public List<User> getUsers() {
 		return users;
 	}
 
-	public void setUsers(User users) {
+	public void setUsers(List<User> users) {
 		this.users = users;
 	}
 

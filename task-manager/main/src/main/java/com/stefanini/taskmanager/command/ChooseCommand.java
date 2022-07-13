@@ -9,5 +9,5 @@ public interface ChooseCommand {
 	 * @param args arguments witch are passed with the start of the program
 	 * @return executes a command
 	 */
-	public Command chooseCommand(String[] args);
+	Command chooseCommand(String[] args);
 }
