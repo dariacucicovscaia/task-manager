@@ -10,6 +10,6 @@ public interface IUserDAO {
 	 * @param username username of the entity
 	 * @return the user entity with the specified username
 	 */
-	User get(String username);
+	User getUseByUserName(String username);
 
 }
