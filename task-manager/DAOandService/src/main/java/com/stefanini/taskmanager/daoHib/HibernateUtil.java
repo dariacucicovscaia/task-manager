@@ -16,7 +16,9 @@ public class HibernateUtil {
 			return new Configuration().configure().addAnnotatedClass(com.stefanini.taskmanager.domain.Task.class)
 					.addAnnotatedClass(com.stefanini.taskmanager.domain.User.class).buildSessionFactory();
 		} catch (Throwable ex) {
-			logger.info("Initial SessionFactory creation failed. " + ex);
+
+			logger.error("Initial SessionFactory creation failed. " + ex);
+
 			throw new ExceptionInInitializerError(ex);
 		}
 	}

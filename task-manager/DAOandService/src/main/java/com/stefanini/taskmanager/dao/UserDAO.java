@@ -12,7 +12,9 @@ import com.stefanini.taskmanager.domain.User;
 public class UserDAO extends DAOAbstractImpl<User> implements IUserDAO {
 
 	@Override
-	public User get(String userName) {
+
+	public User getUseByUserName(String userName) {
+
 		Field fields[] = new User().getClass().getDeclaredFields();
 
 		String columns = " ";
