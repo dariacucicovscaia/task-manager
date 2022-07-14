@@ -1,6 +1,9 @@
 package com.stefanini.taskmanager.command;
 
+import java.util.Scanner;
+
 import com.stefanini.taskmanager.command.acctions.AddTask;
+import com.stefanini.taskmanager.command.acctions.AssignTask;
 import com.stefanini.taskmanager.command.acctions.Command;
 import com.stefanini.taskmanager.command.acctions.CreateUser;
 import com.stefanini.taskmanager.command.acctions.CreateUserAndAddTask;
@@ -13,25 +16,28 @@ import com.stefanini.taskmanager.command.acctions.ShowTasksOfAUser;
 public class ChooseCommandImpl implements ChooseCommand {
 
 	@Override
-	public Command chooseCommand(String[] args) {
+	public Command chooseCommand(Scanner scanner) {
+		String firstArg = scanner.next();
 
-		switch (args[0]) {
+		switch (firstArg) {
 		case "createUser":
-			return new CreateUser(args);
+			return new CreateUser(scanner);
 		case "addTask":
-			return new AddTask(args);
+			return new AddTask(scanner);
+		case "assignTask":
+			return new AssignTask(scanner);
 		case "showAllUsers":
-			return new ShowAllUsers(args);
+			return new ShowAllUsers(scanner);
 		case "showAllTasks":
-			return new ShowAllTasks(args);
+			return new ShowAllTasks(scanner);
 		case "removeUser":
-			return new RemoveUser(args);
+			return new RemoveUser(scanner);
 		case "removeTask":
-			return new RemoveTask(args);
+			return new RemoveTask(scanner);
 		case "showTasksOfAUser":
-			return new ShowTasksOfAUser(args);
+			return new ShowTasksOfAUser(scanner);
 		case "createUserAndAddTask":
-			return new CreateUserAndAddTask(args);
+			return new CreateUserAndAddTask(scanner);
 		default:
 			return null;
 

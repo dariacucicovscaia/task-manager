@@ -1,21 +1,14 @@
 package com.stefanini.taskmanager.command;
 
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class OpsWithArguments {
-	protected String[] args;
+	protected Scanner scanner;
 
-	public OpsWithArguments(String[] args) {
-		this.args = args;
-	}
-
-	public String read(String argument) {
-		String value = null;
-		if (argument.contains("'")) {
-			value = valueBetweenApostrohe(argument);
-		}
-		return value;
+	public OpsWithArguments(Scanner scanner) {
+		this.scanner = scanner;
 	}
 
 	public String valueBetweenApostrohe(String string) {
@@ -31,5 +24,5 @@ public class OpsWithArguments {
 
 		return ValueWeNeed;
 	}
-	
+
 }

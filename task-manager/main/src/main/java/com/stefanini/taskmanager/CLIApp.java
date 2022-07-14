@@ -1,24 +1,36 @@
 package com.stefanini.taskmanager;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
-import com.stefanini.taskmanager.command.ChooseCommandImpl;
+public class CLIApp extends PerformATask {
+	static final int FIXED_THREAD_POOL_SIZE = 5;
 
-public class CLIApp {
 	public static void main(String[] args) {
 
 		Logger logger = Logger.getLogger(CLIApp.class);
 		BasicConfigurator.configure();
 
-		logger.info("App started");
+		System.err.println("Input data to create a User and a Task: ");
 
-		if (args.length == 0) {
-			logger.error("calling without arguments");
+		ExecutorService threadPoolExecutorService = Executors.newFixedThreadPool(FIXED_THREAD_POOL_SIZE);
+
+		for (int i = 0; i < FIXED_THREAD_POOL_SIZE; i++) {
+			try {
+				threadPoolExecutorService.submit(new PerformATask()).get();
+			} catch (InterruptedException | ExecutionException e) {
+				logger.error(e.getMessage());
+			}
 		}
+		threadPoolExecutorService.shutdown();
 
-		ChooseCommandImpl command = new ChooseCommandImpl();
-		command.chooseCommand(args).execute();
+		if (threadPoolExecutorService.isShutdown() == true) {
+			System.out.println("FINISHED!");
+		}
 
 	}
 }

@@ -3,7 +3,6 @@ package com.stefanini.taskmanager.service;
 import java.util.List;
 
 import com.stefanini.taskmanager.domain.Task;
-import com.stefanini.taskmanager.domain.User;
 
 /**
  * abstract method definition for task service
@@ -42,7 +41,7 @@ public interface TaskService {
 	 * @param userName searches the tasks a user has by the user name
 	 * @return tasks of a user
 	 */
-	User getTasksOfAUser(String userName);
+	String getTasksOfAUser(String userName);
 
 	/**
 	 * Removes a user by the id
