@@ -21,7 +21,7 @@ public class Task {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
 	@Id
-	private int taskId;
+	private int id;
 	private String taskTitle;
 	private String taskDescription;
 
@@ -34,8 +34,8 @@ public class Task {
 
 	}
 
-	public Task(int taskId, String taskTitle, String taskDescription) {
-		this.taskId = taskId;
+	public Task(int id, String taskTitle, String taskDescription) {
+		this.id = id;
 		this.taskTitle = taskTitle;
 		this.taskDescription = taskDescription;
 	}
@@ -70,16 +70,16 @@ public class Task {
 	}
 
 	public int getTaskId() {
-		return taskId;
+		return id;
 	}
 
-	public void setTaskId(int taskId) {
-		this.taskId = taskId;
+	public void setTaskId(int id) {
+		this.id = id;
 	}
 
 	@Override
 	public String toString() {
-		return "Task [taskId=" + taskId + ", taskTitle=" + taskTitle + ", taskDescription=" + taskDescription + "]";
+		return "Task [taskId=" + id + ", taskTitle=" + taskTitle + ", taskDescription=" + taskDescription + "]";
 	}
 
 }

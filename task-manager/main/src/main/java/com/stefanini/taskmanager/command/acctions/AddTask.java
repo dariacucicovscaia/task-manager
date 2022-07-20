@@ -1,5 +1,7 @@
 package com.stefanini.taskmanager.command.acctions;
 
+import java.util.Scanner;
+
 import com.stefanini.taskmanager.command.OpsWithArguments;
 import com.stefanini.taskmanager.service.TaskService;
 import com.stefanini.taskmanager.service.TaskServiceImpl;
@@ -7,7 +9,7 @@ import com.stefanini.taskmanager.service.TaskServiceImpl;
 public class AddTask extends OpsWithArguments implements Command {
 	private TaskService taskservice;
 
-	public AddTask(String[] args) {
+	public AddTask(Scanner args) {
 		super(args);
 		taskservice = new TaskServiceImpl();
 	}
@@ -18,8 +20,8 @@ public class AddTask extends OpsWithArguments implements Command {
 	@Override
 	public void execute() {
 
-		String taskTitle = read(args[2]);
-		String taskDescription = read(args[3]);
+		String taskTitle = valueBetweenApostrohe(scanner.next());
+		String taskDescription = valueBetweenApostrohe(scanner.next());
 
 		taskservice.addTask(taskTitle, taskDescription);
 

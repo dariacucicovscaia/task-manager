@@ -5,7 +5,6 @@ import java.util.List;
 import com.stefanini.taskmanager.daoHib.TaskDAO;
 import com.stefanini.taskmanager.daoHib.UserDAO;
 import com.stefanini.taskmanager.domain.Task;
-import com.stefanini.taskmanager.domain.User;
 
 /**
  * @author DCUCICOV
@@ -33,7 +32,10 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public void removeTask(String taskTitle) {
-		taskDao.remove(taskDao.findTaskByTaskTitle(taskTitle).getTaskId());
+		if (taskDao.findTaskByTaskTitle(taskTitle) != null) {
+			taskDao.remove(taskDao.findTaskByTaskTitle(taskTitle).getTaskId());
+		}
+
 	}
 
 	@Override
@@ -42,8 +44,13 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public User getTasksOfAUser(String userName) {
-		return userDao.findUserByUserName(userName);
+	public String getTasksOfAUser(String userName) {
+		if (userDao.findUserByUserName(userName) == null) {
+			return "User does not exist, try another UserName!!";
+
+		}
+		return userDao.findUserByUserName(userName).toString();
+
 	}
 
 }

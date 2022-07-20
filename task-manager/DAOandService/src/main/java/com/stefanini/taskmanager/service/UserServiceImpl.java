@@ -43,8 +43,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void removeUser(String userName) {
-		int Id = userDao.findUserByUserName(userName).getId();
-		userDao.remove(Id);
+
+		if (userDao.findUserByUserName(userName) != null) {
+			int Id = userDao.findUserByUserName(userName).getId();
+			userDao.remove(Id);
+		}
+
 	}
 
 	@Override
@@ -55,8 +59,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@SendMail
 	public void assignTask(String userName, String taskTitle) {
-		User user = userDao.findUserByUserName(userName);
-		user.addTask(taskDao.findTaskByTaskTitle(taskTitle));
+		User user = null;
+
+		if (userDao.findUserByUserName(userName) != null && taskDao.findTaskByTaskTitle(taskTitle) != null) {
+			user = userDao.findUserByUserName(userName);
+			user.addTask(taskDao.findTaskByTaskTitle(taskTitle));
+
+		}
 
 		userDao.update(user);
 	}

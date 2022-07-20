@@ -6,18 +6,22 @@ import com.stefanini.taskmanager.command.OpsWithArguments;
 import com.stefanini.taskmanager.service.UserService;
 import com.stefanini.taskmanager.service.UserServiceImpl;
 
-public class ShowAllUsers extends OpsWithArguments implements Command {
-
+public class AssignTask extends OpsWithArguments implements Command {
 	private UserService userservice;
 
-	public ShowAllUsers(Scanner scanner) {
+	public AssignTask(Scanner scanner) {
 		super(scanner);
 		userservice = new UserServiceImpl();
 	}
 
 	@Override
-	public void execute() {
-		userservice.showAllUsers().stream().forEach(System.err::println);
+	public synchronized void execute() {
+
+		String userName = valueBetweenApostrohe(scanner.next());
+		String taskTitle = valueBetweenApostrohe(scanner.next());
+
+		userservice.assignTask(userName, taskTitle);
+		;
 
 	}
 
